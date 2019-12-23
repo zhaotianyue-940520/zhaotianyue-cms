@@ -105,7 +105,6 @@ public class ArticleController extends BaseController{
 		Complain complain = new Complain();
 		request.setAttribute("complain", complain);
 		complain.setArticleId(article.getId());
-		request.setAttribute("article", article);
 		return "article/complain";
 				
 	}
