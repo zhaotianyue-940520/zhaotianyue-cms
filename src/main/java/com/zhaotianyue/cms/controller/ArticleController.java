@@ -102,7 +102,10 @@ public class ArticleController extends BaseController{
 	public String complain(HttpServletRequest request,int articleId) {
 		Article article= as.getById(articleId);
 		request.setAttribute("article", article);
-		request.setAttribute("complain", new Complain());
+		Complain complain = new Complain();
+		request.setAttribute("complain", complain);
+		complain.setArticleId(article.getId());
+		request.setAttribute("article", article);
 		return "article/complain";
 				
 	}
@@ -120,11 +123,12 @@ public class ArticleController extends BaseController{
 			@ModelAttribute("complain") @Valid Complain complain,BindingResult result,
 			MultipartFile file
 			) throws IllegalStateException, IOException {
-		
+		System.out.println("--------" + complain.getArticleId());
 		if(!StringUtils.isHttpUrl(complain.getSrcUrl())) {
 			result.rejectValue("srcUrl", "", "不是合法的url地址");
 		}
 		if(result.hasErrors()) {
+			
 			return "article/complain";
 		}
 		
