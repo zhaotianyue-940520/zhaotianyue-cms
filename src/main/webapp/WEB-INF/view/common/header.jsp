@@ -37,7 +37,7 @@
 		      </c:if>
 		     
 		      <c:if test="${sessionScope.user==null}">
-			       <li class="nav-item nav-link"><a href="/user/login">登录</a></li>
+			       <li class="nav-item nav-link"><a href="/user/register_login">登录</a></li>
 		      </c:if>
       
     	</ul>

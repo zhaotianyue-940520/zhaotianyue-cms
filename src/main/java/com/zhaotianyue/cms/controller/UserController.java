@@ -7,7 +7,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,10 +80,22 @@ public class UserController {
 	}
 	//登录加后台验证
 	@RequestMapping("login")
-	public String login(@ModelAttribute("u") User u,Model m,HttpServletRequest request) {
+	public String login(@ModelAttribute("u") User u,Model m,HttpServletResponse response,HttpServletRequest request) {
+		String pwd =  new String(u.getPassword());
 		User user = us.onlyUser(u);
 		if(user!=null) {
 			request.getSession().setAttribute(Constant.ONLYUSER,user);
+			
+			//保存用户的用户名和密码
+			Cookie cookieUserName = new Cookie("username", user.getUsername());
+			cookieUserName.setPath("/");
+			cookieUserName.setMaxAge(10*24*3600);// 10天
+			response.addCookie(cookieUserName);
+			Cookie cookieUserPwd = new Cookie("userpwd", pwd);
+			cookieUserPwd.setPath("/");
+			cookieUserPwd.setMaxAge(10*24*3600);// 10天
+			response.addCookie(cookieUserPwd);
+			
 			if(user.getRole().equals(Constant.COMMONUSERS)) {
 				return "redirect:home";
 			}else {
@@ -242,8 +256,16 @@ public class UserController {
 	}
 	
 	@RequestMapping("logout")
-	public String home(HttpServletRequest request) {
+	public String home(HttpServletRequest request,HttpServletResponse response) {
 		request.getSession().removeAttribute(Constant.ONLYUSER);
+		Cookie cookieUserName = new Cookie("username", "");
+		cookieUserName.setPath("/");
+		cookieUserName.setMaxAge(0);// 立即过期
+		response.addCookie(cookieUserName);
+		Cookie cookieUserPwd = new Cookie("userpwd", "");
+		cookieUserPwd.setPath("/");
+		cookieUserPwd.setMaxAge(0);// 立即过期
+		response.addCookie(cookieUserPwd);
 		return "redirect:/";
 	}
 }
