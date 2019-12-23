@@ -2,11 +2,14 @@ package com.zhaotianyue.cms.service;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import com.github.pagehelper.PageInfo;
 import com.zhaotianyue.cms.entity.Article;
 import com.zhaotianyue.cms.entity.Category;
 import com.zhaotianyue.cms.entity.Channel;
 import com.zhaotianyue.cms.entity.Comment;
+import com.zhaotianyue.cms.entity.Complain;
 import com.zhaotianyue.cms.entity.Link;
 import com.zhaotianyue.cms.entity.Slide;
 
@@ -72,4 +75,8 @@ public interface ArticleService {
 	PageInfo<Comment> getComments(int articleId, int page);
 	//查询所有友情链接
 	PageInfo<Link> link(int page);
+
+	int addComplian(@Valid Complain complain);
+	
+	PageInfo<Complain> getComplains(int articleId, int page);
 }

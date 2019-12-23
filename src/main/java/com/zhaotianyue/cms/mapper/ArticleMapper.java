@@ -13,6 +13,7 @@ import com.zhaotianyue.cms.entity.Article;
 import com.zhaotianyue.cms.entity.Category;
 import com.zhaotianyue.cms.entity.Channel;
 import com.zhaotianyue.cms.entity.Comment;
+import com.zhaotianyue.cms.entity.Complain;
 import com.zhaotianyue.cms.entity.Link;
 
 public interface ArticleMapper {
@@ -90,4 +91,18 @@ public interface ArticleMapper {
 	List<Comment> getComments(int articleId);
 	@Select(" select * from cms_link ")
 	List<Link> link();
+	@Insert("INSERT INTO cms_complain(article_id,user_id,complain_type,"
+			+ "compain_option,src_url,picture,content,email,mobile,created)"
+			+ "   VALUES(#{articleId},#{userId},"
+			+ "#{complainType},#{compainOption},#{srcUrl},#{picture},#{content},#{email},#{mobile},now())")
+	int addCoplain(Complain complain);
+	@Update("UPDATE cms_article SET complainCnt=complainCnt+1,status=if(complainCnt>10,2,status)  "
+			+ " WHERE id=#{value}")
+	void increaseComplainCnt(Integer articleId);
+	/**
+	 * 
+	 * @param articleId
+	 * @return
+	 */
+	List<Complain> getComplains(int articleId);
 }

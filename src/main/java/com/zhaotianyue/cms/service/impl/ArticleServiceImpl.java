@@ -12,6 +12,7 @@ import com.zhaotianyue.cms.entity.Article;
 import com.zhaotianyue.cms.entity.Category;
 import com.zhaotianyue.cms.entity.Channel;
 import com.zhaotianyue.cms.entity.Comment;
+import com.zhaotianyue.cms.entity.Complain;
 import com.zhaotianyue.cms.entity.Link;
 import com.zhaotianyue.cms.entity.Slide;
 import com.zhaotianyue.cms.mapper.ArticleMapper;
@@ -28,7 +29,6 @@ public class ArticleServiceImpl implements ArticleService {
 	public PageInfo<Article> listByUser(Integer id, int pageNum) {
 		// TODO Auto-generated method stub
 		PageHelper.startPage(pageNum, Constant.PAGESIZE);
-		
 		return new PageInfo<Article>(am.listByUser(id));
 	}
 
@@ -152,5 +152,24 @@ public class ArticleServiceImpl implements ArticleService {
 	public PageInfo<Link> link(int page) {
 		PageHelper.startPage(page, Constant.PAGESIZE);
 		return new PageInfo<Link>(am.link());
+	}
+	
+	@Override
+	public int addComplian(Complain complain) {
+		// TODO Auto-generated method stub
+		
+		//添加投诉到数据库
+		int result = am.addCoplain(complain);
+		// 增加投诉的数量
+		if(result>0)
+			am.increaseComplainCnt(complain.getArticleId());
+		
+		return 0;
+	}
+	@Override
+	public PageInfo<Complain> getComplains(int articleId, int page) {
+		// TODO Auto-generated method stub
+		PageHelper.startPage(page, Constant.PAGESIZE);
+		return new PageInfo<Complain>(am.getComplains(articleId));
 	}
 }

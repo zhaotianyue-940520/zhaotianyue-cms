@@ -48,6 +48,7 @@
         			<td width="200px">
         				<input type="button" value="删除"  class="btn btn-dark" onclick="del(${article.id})">
         				<input type="button" value="审核"  class="btn btn-dark" onclick="check(${article.id})" >
+        				<input type="button" value="管理投诉"  class="btn btn-warning" onclick="complainList(${article.id})" >
         			</td>
         		</tr>
         	</c:forEach>
@@ -66,6 +67,29 @@
 		    </li>
 		  </ul>
 		</nav>
+		
+		<div class="modal fade"   id="complainModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+		  <div class="modal-dialog" role="document" style="margin-left:100px;">
+		    <div class="modal-content" style="width:1200px;" >
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="exampleModalLongTitle">文章审核</h5>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      <div class="modal-body" id="complainListDiv">
+		         
+		         		
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+		        <button type="button" class="btn btn-primary" onclick="setStatus(1)">审核通过</button>
+		        <button type="button" class="btn btn-primary" onclick="setStatus(2)">审核拒绝</button>
+		       
+		      </div>
+		    </div>
+		  </div>
+		</div>
 		
 		<div class="modal fade"   id="articleContent" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
 		  <div class="modal-dialog" role="document" style="margin-left:100px;">
@@ -90,7 +114,9 @@
 		      </div>
 		    </div>
 		  </div>
-</div>
+	</div>
+	
+	
 		<script type="text/javascript">
 		
 		$('#articleContent').on('hidden.bs.modal', function (e) {
@@ -179,6 +205,15 @@
 				alert(msg.error);
 			},
 			"json")
+		}
+		
+		/**
+		* 查看文章的投诉
+		*/
+		function complainList(id){
+			$("#complainModal").modal('show')
+			$("#complainListDiv").load("/article/complains?articleId="+id);
+			
 		}
 		
 		
