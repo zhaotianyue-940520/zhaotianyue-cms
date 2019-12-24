@@ -49,7 +49,7 @@
         			<td width="200px">
         				<input type="button" value="删除"  class="btn btn-dark" onclick="del(${article.id})">
         				<input type="button" value="审核"  class="btn btn-dark" onclick="check(${article.id})" >
-        				<input type="button" value="管理投诉"  class="btn btn-warning" onclick="complainList(${article.id})" >
+        				<%-- <input type="button" value="管理投诉"  class="btn btn-warning" onclick="complainList(${article.id})" > --%>
         			</td>
         		</tr>
         	</c:forEach>
