@@ -62,7 +62,7 @@
 			<!-- 左侧的菜单 -->
 			<ul class="nav flex-column mymenuselected" style="background:#343a40" >
 				  <li class="nav-item ">
-				    <a class="nav-link active" href="#" onclick="showWork($(this),'/admin/article?status=0&page=1')" id="postLink" style="color:white;" >文章管理</a>
+				    <a class="nav-link active" href="#" onclick="showWork($(this),'/admin/article')" id="postLink" style="color:white;" >文章管理</a>
 				  </li>
 				  <li class="nav-item">
 				    <a  class="nav-link" href="#" onclick="showWork($(this),'/admin/comment')"  style="color:white;" >评论管理</a>

@@ -23,7 +23,10 @@
 	<select id="list" resultMap="ArticleMap">
 		SELECT id,title,channel_id,category_id ,user_id, created,status,picture
 		  FROM cms_article
-		  WHERE status = #{value} AND deleted=0
+		  WHERE  deleted=0
+		  <if test="value!=-1">
+		  	and status = #{value} 
+		  </if>
 		  ORDER BY id DESC  
 		  
 	</select>

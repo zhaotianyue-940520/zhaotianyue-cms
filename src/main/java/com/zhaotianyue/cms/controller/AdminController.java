@@ -106,7 +106,7 @@ public class AdminController {
 	}
 	
 	@RequestMapping("article")
-	public String article(HttpServletRequest request,int status ,int page) {
+	public String article(HttpServletRequest request,@RequestParam(defaultValue = "-1")int status ,@RequestParam(defaultValue = "1")int page) {
 		PageInfo<Article> articlePage =  as.list(status ,page);
 		request.setAttribute("pg", articlePage);
 		request.setAttribute("status", status);

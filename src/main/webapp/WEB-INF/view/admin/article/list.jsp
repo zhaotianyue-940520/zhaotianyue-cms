@@ -11,6 +11,7 @@
 <body>	
 		审核状态:
 		<select id="state">
+			<option value="-1" ${status==-1?"selected":""} >全部</option>
 			<option value="0" ${status==0?"selected":""} >待审核</option>
 			<option value="1" ${status==1?"selected":""}>审核通过</option>
 			<option value="2" ${status==2?"selected":""}>审核被拒</option>
@@ -128,6 +129,7 @@
 		$(function(){
 				
 			$("#state").change(function(){
+				alert($('#state').val())
 				$("#workcontent").load("/admin/article?page=" + '${pg.pageNum}' + "&status="+$('#state').val());
 			})
 		})
