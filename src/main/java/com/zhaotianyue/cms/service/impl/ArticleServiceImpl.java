@@ -172,4 +172,10 @@ public class ArticleServiceImpl implements ArticleService {
 		PageHelper.startPage(page, Constant.PAGESIZE);
 		return new PageInfo<Complain>(am.getComplains(articleId));
 	}
+
+	@Override
+	public PageInfo<Complain> complain(int page) {
+		PageHelper.startPage(page, Constant.PAGESIZE);
+		return new PageInfo<Complain>(am.complain());
+	}
 }

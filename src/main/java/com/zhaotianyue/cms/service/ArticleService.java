@@ -79,4 +79,6 @@ public interface ArticleService {
 	int addComplian(@Valid Complain complain);
 	
 	PageInfo<Complain> getComplains(int articleId, int page);
+
+	PageInfo<Complain> complain(int page);
 }

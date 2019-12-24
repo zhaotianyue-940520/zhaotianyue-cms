@@ -65,10 +65,13 @@
 				    <a class="nav-link active" href="#" onclick="showWork($(this),'/admin/article')" id="postLink" style="color:white;" >文章管理</a>
 				  </li>
 				  <li class="nav-item">
-				    <a  class="nav-link" href="#" onclick="showWork($(this),'/admin/comment')"  style="color:white;" >评论管理</a>
+				    <a class="nav-link" href="#" onclick="showWork($(this),'/admin/complain')" style="color:white;" >查看所有投诉</a>
 				  </li>
 				  <li class="nav-item">
 				    <a class="nav-link" href="#" onclick="showWork($(this),'/admin/link?page=1')" style="color:white;" >友情链接管理</a>
+				  </li>
+				  <li class="nav-item">
+				    <a  class="nav-link" href="#" onclick="showWork($(this),'/admin/comment')"  style="color:white;" >评论管理</a>
 				  </li>
 				  <li class="nav-item">
 				    <a class="nav-link" href="#" onclick="showWork($(this),'/admin/user')" style="color:white;" >用户管理管理</a>

@@ -1,5 +1,7 @@
 package com.zhaotianyue.cms.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import com.github.pagehelper.PageInfo;
 import com.zhaotianyue.cms.condition.CmsError;
 import com.zhaotianyue.cms.condition.CmsMessage;
 import com.zhaotianyue.cms.entity.Article;
+import com.zhaotianyue.cms.entity.Complain;
 import com.zhaotianyue.cms.entity.Link;
 import com.zhaotianyue.cms.service.ArticleService;
 import com.zhaotianyue.cms.service.LinkService;
@@ -118,6 +121,13 @@ public class AdminController {
 		PageInfo<Link> articlePage = as.link(page);
 		request.setAttribute("pg", articlePage);
 		return "admin/article/link";
+		
+	}
+	@RequestMapping("complain")
+	public String complain(HttpServletRequest request, @RequestParam(defaultValue = "1") int page) {
+		PageInfo<Complain> articlePage = as.complain(page);
+		request.setAttribute("pg", articlePage);
+		return "admin/article/complain";
 		
 	}
 	@ResponseBody

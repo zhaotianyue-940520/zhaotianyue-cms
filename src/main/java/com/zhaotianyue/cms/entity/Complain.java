@@ -30,6 +30,10 @@ public class Complain {
 	
 	private Date created          ;
 	
+	private String username;
+	
+	private String title;
+	
 	private User user;
 
 	public Integer getId() {
@@ -120,6 +124,22 @@ public class Complain {
 		this.created = created;
 	}
 
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
 	public User getUser() {
 		return user;
 	}
@@ -133,12 +153,12 @@ public class Complain {
 		return "Complain [id=" + id + ", articleId=" + articleId + ", userId=" + userId + ", complainType="
 				+ complainType + ", compainOption=" + compainOption + ", srcUrl=" + srcUrl + ", picture=" + picture
 				+ ", content=" + content + ", email=" + email + ", mobile=" + mobile + ", created=" + created
-				+ ", user=" + user + "]";
+				+ ", username=" + username + ", title=" + title + ", user=" + user + "]";
 	}
 
 	public Complain(Integer id, @NotNull Integer articleId, Integer userId, @NotNull Integer complainType,
 			@NotBlank String compainOption, String srcUrl, String picture, String content, @Email String email,
-			String mobile, Date created, User user) {
+			String mobile, Date created, String username, String title, User user) {
 		super();
 		this.id = id;
 		this.articleId = articleId;
@@ -151,6 +171,8 @@ public class Complain {
 		this.email = email;
 		this.mobile = mobile;
 		this.created = created;
+		this.username = username;
+		this.title = title;
 		this.user = user;
 	}
 
@@ -158,6 +180,6 @@ public class Complain {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	
 }

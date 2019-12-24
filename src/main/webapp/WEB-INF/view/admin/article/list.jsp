@@ -123,6 +123,9 @@
 		$('#articleContent').on('hidden.bs.modal', function (e) {
 			refreshPage();
 			})
+		$('#complainModal').on('hidden.bs.modal', function (e) {
+			refreshPage();
+			})
 		
 		
 		
@@ -175,12 +178,15 @@
 		*  status 0  待审核  1 通过    2 拒绝 
 		*/
 		function setStatus(status){
+			
 			var id = global_article_id;
+			alert(id)
 			$.post("/admin/setArticeStatus",{id:id,status:status},function(msg){
 				if(msg.code==1){
 					alert('操作成功')
 					//隐藏当前的模态框
 					$('#articleContent').modal('hide')
+					$('#complainModal').modal('hide')
 					//刷新当前的页面
 					return;	
 				}
@@ -215,7 +221,7 @@
 		function complainList(id){
 			$("#complainModal").modal('show')
 			$("#complainListDiv").load("/article/complains?articleId="+id);
-			
+			global_article_id=id;
 		}
 		
 		

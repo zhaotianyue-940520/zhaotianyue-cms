@@ -105,4 +105,6 @@ public interface ArticleMapper {
 	 * @return
 	 */
 	List<Complain> getComplains(int articleId);
+	
+	List<Complain> complain();
 }

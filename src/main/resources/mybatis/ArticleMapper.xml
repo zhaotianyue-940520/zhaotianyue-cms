@@ -78,12 +78,19 @@
 		<result column="src_url" property="srcUrl"/>
 		<result column="compain_option" property="compainOption"/>
 		<result column="user_id" property="userId"/>
-		<association column="user_id" property="user" 
-			javaType="com.zhaotianyue.cms.entity.User"
-			select="findUser"
-		/>
+		<association column="user_id" property="user" javaType="com.zhaotianyue.cms.entity.User" select="findUser" />
 	</resultMap>
 	<select id="getComplains" resultMap="ComplainMapper">
 		SELECT * FROM cms_complain where article_id=#{value}
+	</select>
+	<select id="complain" resultType="com.zhaotianyue.cms.entity.Complain">
+		SELECT c.id,c.article_id articleId,c.user_id userId,
+		complain_type complainType,c.compain_option compainOption,
+		c.src_url srcUrl,c.picture,c.content,c.email,c.mobile,c.created,
+		u.username,a.title 
+		FROM cms_complain c 
+		LEFT JOIN cms_article a ON c.article_id=a.id 
+		LEFT JOIN cms_user u ON c.user_id=u.id 
+		ORDER BY a.id
 	</select>
   </mapper>
