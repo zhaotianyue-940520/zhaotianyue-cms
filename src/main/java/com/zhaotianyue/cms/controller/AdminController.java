@@ -15,7 +15,7 @@ import com.zhaotianyue.cms.entity.Article;
 import com.zhaotianyue.cms.entity.Link;
 import com.zhaotianyue.cms.service.ArticleService;
 import com.zhaotianyue.cms.service.LinkService;
-
+//管理员的控制层
 @Controller
 @RequestMapping("admin")
 public class AdminController {
@@ -24,11 +24,12 @@ public class AdminController {
 	
 	@Autowired
 	LinkService ls;
-	
+	//进入管理员界面
 	@RequestMapping("index")
 	public String index() {
 		return "admin/index";
 	}
+	//查看热点文章
 	@RequestMapping("setArticeHot")
 	@ResponseBody
 	public CmsMessage setArticeHot(int id,int status) {

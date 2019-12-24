@@ -1,6 +1,7 @@
 package com.zhaotianyue.cms.controller;
 
 import java.io.IOException;
+import java.util.Calendar;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -36,7 +37,6 @@ public class ArticleController extends BaseController{
 	@ResponseBody
 	public CmsMessage getDetail(int id) {
 		if(id<=0) {
-			
 		}
 		// 获取文章详情
 		Article article = as.getById(id);
@@ -122,7 +122,6 @@ public class ArticleController extends BaseController{
 			@ModelAttribute("complain") @Valid Complain complain,BindingResult result,
 			MultipartFile file
 			) throws IllegalStateException, IOException {
-		System.out.println("--------" + complain.getArticleId());
 		if(!StringUtils.isHttpUrl(complain.getSrcUrl())) {
 			result.rejectValue("srcUrl", "", "不是合法的url地址");
 		}

@@ -1,5 +1,5 @@
 package com.zhaotianyue.cms.condition;
-
+//错误的返回常量
 public class CmsError {
 	/**
 	 * 成功

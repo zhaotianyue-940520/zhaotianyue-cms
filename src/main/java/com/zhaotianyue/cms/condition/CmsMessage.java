@@ -1,7 +1,7 @@
 package com.zhaotianyue.cms.condition;
 
 import java.io.Serializable;
-
+//ajax返回消息对象,并提交是否错误,如果错误就不提交数据,只提示错误信息
 public class CmsMessage implements Serializable{
 
 	/**
@@ -9,9 +9,9 @@ public class CmsMessage implements Serializable{
 	 */
 	private static final long serialVersionUID = -4837689890711238025L;
 
-	private int code;
-	private String error;
-	private Object data;
+	private int code; // 里面写CmsError的常量
+	private String error;//错误提示信息
+	private Object data;//数据
 	public int getCode() {
 		return code;
 	}

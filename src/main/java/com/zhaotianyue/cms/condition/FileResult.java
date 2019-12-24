@@ -1,6 +1,6 @@
 package com.zhaotianyue.cms.condition;
 
-
+//富文本的错误信息
 public class FileResult {
 	
 	public FileResult(int error, String url) {

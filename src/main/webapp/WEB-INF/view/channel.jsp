@@ -65,7 +65,7 @@
 	<div class="row">
 		<!-- 左侧栏目 -->
 		<div class="col-md-2">
-			<div>一片小暖阳</div>
+			<h2>一片小暖阳</h2>
 			<div>
 				<ul class="nav flex-column" >
 					<c:forEach items="${channels}" var="channel">
