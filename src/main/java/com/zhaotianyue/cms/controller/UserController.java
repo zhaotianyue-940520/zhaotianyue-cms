@@ -80,21 +80,23 @@ public class UserController {
 	}
 	//登录加后台验证
 	@RequestMapping("login")
-	public String login(@ModelAttribute("u") User u,Model m,HttpServletResponse response,HttpServletRequest request) {
+	public String login(@ModelAttribute("u") User u,Model m,HttpServletResponse response,HttpServletRequest request,String denglu) {
 		String pwd =  new String(u.getPassword());
 		User user = us.onlyUser(u);
 		if(user!=null) {
 			request.getSession().setAttribute(Constant.ONLYUSER,user);
 			
 			//保存用户的用户名和密码
-			Cookie cookieUserName = new Cookie("username", user.getUsername());
-			cookieUserName.setPath("/");
-			cookieUserName.setMaxAge(10*24*3600);// 10天
-			response.addCookie(cookieUserName);
-			Cookie cookieUserPwd = new Cookie("userpwd", pwd);
-			cookieUserPwd.setPath("/");
-			cookieUserPwd.setMaxAge(10*24*3600);// 10天
-			response.addCookie(cookieUserPwd);
+			if(denglu!=null) {
+				Cookie cookieUserName = new Cookie("username", user.getUsername());
+				cookieUserName.setPath("/");
+				cookieUserName.setMaxAge(10*24*3600);// 10天
+				response.addCookie(cookieUserName);
+				Cookie cookieUserPwd = new Cookie("userpwd", pwd);
+				cookieUserPwd.setPath("/");
+				cookieUserPwd.setMaxAge(10*24*3600);// 10天
+				response.addCookie(cookieUserPwd);
+			}
 			
 			if(user.getRole().equals(Constant.COMMONUSERS)) {
 				return "redirect:home";

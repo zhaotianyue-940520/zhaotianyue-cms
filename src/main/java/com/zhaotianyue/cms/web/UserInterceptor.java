@@ -36,7 +36,7 @@ public class UserInterceptor implements HandlerInterceptor{
 				// 说明cookie中存放的用户信息不完整
 				if(null==user.getUsername() || null== user.getPassword()) {
 					//request.s
-					response.sendRedirect("/user/login");
+					response.sendRedirect("/user/register_login");
 					//request.getRequestDispatcher("/user/login").forward(request, response);
 					return false;
 				}

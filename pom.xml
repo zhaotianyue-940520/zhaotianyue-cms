@@ -34,8 +34,8 @@
   
   		<!-- 自己工具类  -->
 		<dependency>
-			<groupId>com.zhaotianyue..cms.utils</groupId>
-			<artifactId>zhuzhiguang-cms-utils</artifactId>
+			<groupId>com.zhaotianyue.cms.utils</groupId>
+			<artifactId>zhaotianyue-cms-utils</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>

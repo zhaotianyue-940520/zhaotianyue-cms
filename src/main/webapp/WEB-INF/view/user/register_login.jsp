@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
@@ -51,7 +52,7 @@
       </div>
       <input type="text" name="username" placeholder="账号"/><form:errors path="username" cssStyle="color:red"></form:errors>
       <input type="password" name="password" placeholder="密码"/><form:errors path="password" cssStyle="color:red"></form:errors>
-      <button>登录</button>
+      <button>登录</button><input  type="checkbox" value="false" id="ff" name="denglu" onclick="gb()" >记录登录 
     </form>
   </div>
   <div class="overlay-container">
@@ -75,6 +76,14 @@
 <script type="text/javascript" src="/resource/login/js/messages_zh.js"></script>
 <script type="text/javascript">
 	$("#reg").validate();
+	
+	function gb(){
+		if($("#ff").val()=='false'){
+			$("#ff").val("true")
+		}else{
+			$("#ff").val("false")
+		}
+	}
 </script>
 </body>
 </html>
