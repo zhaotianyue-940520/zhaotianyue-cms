@@ -3,6 +3,7 @@ package com.zhaotianyue.cms.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import com.github.pagehelper.PageHelper;
@@ -24,6 +25,8 @@ public class ArticleServiceImpl implements ArticleService {
 	ArticleMapper am;
 	@Autowired
 	SlideMapper sm;
+	@Autowired
+	RedisTemplate rt;
 	
 	@Override
 	public PageInfo<Article> listByUser(Integer id, int pageNum) {
@@ -95,12 +98,6 @@ public class ArticleServiceImpl implements ArticleService {
 		return am.CheckStatus(id,status);
 	}
 	
-	@Override
-	public PageInfo<Article> hotList(int page) {
-		// TODO Auto-generated method stub
-		PageHelper.startPage(page,Constant.PAGESIZE);
-		return new PageInfo<>(am.hostList());
-	}
 
 	@Override
 	public List<Article> lastList() {
@@ -177,5 +174,30 @@ public class ArticleServiceImpl implements ArticleService {
 	public PageInfo<Complain> complain(int page) {
 		PageHelper.startPage(page, Constant.PAGESIZE);
 		return new PageInfo<Complain>(am.complain());
+	}
+
+	@Override
+	public List<Article> listAll() {
+		// TODO Auto-generated method stub
+		return am.listAll();
+	}
+
+	@Override
+	public void liulan(String art) {
+		System.out.println("---------------------------");
+		am.liulan(art);
+	}
+
+	@Override
+	public List<Article> hotList() {
+		// TODO Auto-generated method stub
+		return am.hostList();
+	}
+	@Override
+	public PageInfo<Article> hotList(int page) {
+		// TODO Auto-generated method stub
+		PageHelper.startPage(page,Constant.PAGESIZE);
+		
+		return new PageInfo<>(am.hostList());
 	}
 }

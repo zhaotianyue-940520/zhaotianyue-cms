@@ -1,12 +1,13 @@
 package com.zhaotianyue.cms.controller;
 
 import java.io.IOException;
-import java.util.Calendar;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageInfo;
 import com.zhaotianyue.cms.condition.CmsError;
 import com.zhaotianyue.cms.condition.CmsMessage;
@@ -32,6 +34,11 @@ import com.zhaotianyue.cms.utils.StringUtils;
 public class ArticleController extends BaseController{
 	@Autowired
 	ArticleService as;
+	@Autowired
+	KafkaTemplate<String, String> kt;
+	
+	@Autowired
+	RedisTemplate rt;
 	
 	@RequestMapping("getDetail")
 	@ResponseBody
@@ -57,6 +64,8 @@ public class ArticleController extends BaseController{
 		
 		Article article = as.getById(id);
 		request.setAttribute("article", article);
+		kt.send("articles", JSON.toJSONString("add"+id));
+		
 		return "detail";
 	}
 	

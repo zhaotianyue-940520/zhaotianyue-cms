@@ -14,6 +14,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,13 +25,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageInfo;
 import com.zhaotianyue.cms.condition.Constant;
 import com.zhaotianyue.cms.entity.Article;
 import com.zhaotianyue.cms.entity.Category;
 import com.zhaotianyue.cms.entity.Channel;
+import com.zhaotianyue.cms.entity.Collect;
 import com.zhaotianyue.cms.entity.User;
+import com.zhaotianyue.cms.mapper.ArticleEs;
 import com.zhaotianyue.cms.service.ArticleService;
+import com.zhaotianyue.cms.service.CollectService;
 import com.zhaotianyue.cms.service.UserService;
 import com.zhaotianyue.cms.utils.FileUtils;
 import com.zhaotianyue.cms.utils.HtmlUtils;
@@ -44,10 +49,19 @@ public class UserController {
 	String picRootPath;
 	
 	@Autowired
+	ArticleEs ae;
+	
+	@Autowired
 	UserService us;
 	
 	@Autowired
+	CollectService collectService;
+	
+	@Autowired
 	ArticleService as;
+	
+	@Autowired
+	KafkaTemplate kafkaTemplate;
 	
 	//进入登录/注册页面
 	@RequestMapping("register_login")
@@ -122,11 +136,40 @@ public class UserController {
 		request.setAttribute("pg", pg);
 		return "user/article/list";
 	}
+	//我的收藏展示
+	@RequestMapping("collect")
+	public String collect(@RequestParam(defaultValue = "1")int pageNum,HttpServletRequest request) {
+		User u = (User) request.getSession().getAttribute(Constant.ONLYUSER);
+		PageInfo<Collect> pg = collectService.listCollect(u.getId(),pageNum);
+		
+		request.setAttribute("pg", pg);
+		return "user/article/collect";
+	}
+	//进入添加收藏页面
+	@RequestMapping("addcollect")
+	public String addcollect(Collect collect,Model m) {
+		m.addAttribute("collect", collect);
+		return "user/article/addcollect";
+	}
+	//进入添加收藏页面
+	@RequestMapping("addcoll")
+	public String addcoll(@Valid@ModelAttribute("collect")Collect collect,BindingResult result,HttpServletRequest request,Model m) {
+		if(StringUtils.isHttpUrl(collect.getUrl())) {
+			User u = (User) request.getSession().getAttribute(Constant.ONLYUSER);
+			collect.setUserId(String.valueOf(u.getId()));
+			collectService.save(collect);
+			return "redirect:home";
+		}else {
+			m.addAttribute("msg","地址错误!");
+			return "user/article/addcollect";
+		}
+		
+	}
 	//用户登录个人文章逻辑删除
 	@ResponseBody
-	@RequestMapping("deletearticle")
-	public boolean deletearticle(int id) {
-		int result  = as.delete(id);
+	@RequestMapping("deletecollect")
+	public boolean deletecollect(int id) {
+		int result  = collectService.delete(id);
 		return result > 0;
 	}
 	
@@ -170,8 +213,9 @@ public class UserController {
 		article.setUser_id(loginUser.getId());
 		
 		article.setArticleType(0);
-		
-		
+		String jsonString = JSON.toJSONString(article);
+		jsonString="add="+jsonString;
+		kafkaTemplate.send("articles", jsonString);
 		return as.add(article)>0;
 		
 		

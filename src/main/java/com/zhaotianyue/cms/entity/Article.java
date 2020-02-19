@@ -1,10 +1,19 @@
 package com.zhaotianyue.cms.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Article {
+import org.springframework.data.annotation.Id;
+import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
+@Document(indexName = "1708e",type = "article")
+public class Article implements Serializable{
+	@Id
 	private Integer id         ;
+	@Field(analyzer="ik_smart",index=true,store=true,searchAnalyzer="ik_smart",type=FieldType.text)
 	private String title      ;
+	@Field(analyzer="ik_smart",index=true,store=true,searchAnalyzer="ik_smart",type=FieldType.text)
 	private String content    ;
 	private String picture    ;
 	private Integer channel_id ;
@@ -156,9 +165,8 @@ public class Article {
 	}
 	public Article() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
-	@Override
+
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;

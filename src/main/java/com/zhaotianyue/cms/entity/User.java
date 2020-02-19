@@ -3,8 +3,7 @@ package com.zhaotianyue.cms.entity;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+
 
 import com.zhaotianyue.cms.condition.Gender;
 

@@ -104,7 +104,7 @@
 			</div>
 			<!-- 文章的列表 -->
 			<div style="margin-top:20px">
-				<c:forEach items="${articlePage.list}" var="article">
+				<c:forEach items="${articlePage}" var="article">
 					<div class="row" style="margin-top:5px">
 						<div class="col-md-3">
 							<img width="150px" height="120px" src="/pic/${article.picture}"
@@ -122,39 +122,39 @@
 					</div>
 				</c:forEach>
 			</div>
-			<div class="row justify-content-center" style="margin-top:20px">
-				<nav aria-label="Page navigation example" >
-					  <ul class="pagination ">
+<!-- 			<div class="row justify-content-center" style="margin-top:20px"> -->
+<!-- 				<nav aria-label="Page navigation example" > -->
+<!-- 					  <ul class="pagination "> -->
 					  
-					    <li class="page-item">
-					      <a class="page-link" href="/index?page=${articlePage.pageNum-1}" aria-label="Previous">
-					        <span aria-hidden="true">&laquo;</span>
-					      </a>
-					    </li>
+<!-- 					    <li class="page-item"> -->
+<%-- 					      <a class="page-link" href="/index?page=${articlePage.pageNum-1}&key=${key}" aria-label="Previous"> --%>
+<!-- 					        <span aria-hidden="true">&laquo;</span> -->
+<!-- 					      </a> -->
+<!-- 					    </li> -->
 					    
-					    <c:forEach begin="1" end="${articlePage.pages}" varStatus="index">
+<%-- 					    <c:forEach begin="1" end="${articlePage.pages}" varStatus="index"> --%>
 					    	
-					    	<!-- 当前页码的处理 -->
-					    	<c:if test="${articlePage.pageNum==index.index}">
-					    		<li class="page-item"><a class="page-link" href="javascript:void()"><font color="red"> ${index.index} </font></a>  </li>
-					  		</c:if>
+<!-- 					    	当前页码的处理 -->
+<%-- 					    	<c:if test="${articlePage.pageNum==index.index}"> --%>
+<%-- 					    		<li class="page-item"><a class="page-link" href="javascript:void()"><font color="red"> ${index.index} </font></a>  </li> --%>
+<%-- 					  		</c:if> --%>
 					  		
-					  		<!-- 非当前页码的处理 -->
-							<c:if test="${articlePage.pageNum!=index.index}">
-					    		<li class="page-item"><a class="page-link" href="/index?page=${index.index}"> ${index.index}</a></li>
-					  		</c:if>
+<!-- 					  		非当前页码的处理 -->
+<%-- 							<c:if test="${articlePage.pageNum!=index.index}"> --%>
+<%-- 					    		<li class="page-item"><a class="page-link" href="/index?page=${index.index}&key=${key}"> ${index.index}</a></li> --%>
+<%-- 					  		</c:if> --%>
 					  
-					    </c:forEach>
+<%-- 					    </c:forEach> --%>
 					    
-					    <li class="page-item">
-					      <a class="page-link" href="/index?page=${articlePage.pageNum+1}" aria-label="Next">
-					        <span aria-hidden="true">&raquo;</span>
-					      </a>
-					    </li>
+<!-- 					    <li class="page-item"> -->
+<%-- 					      <a class="page-link" href="/index?page=${articlePage.pageNum+1}&key=${key}" aria-label="Next"> --%>
+<!-- 					        <span aria-hidden="true">&raquo;</span> -->
+<!-- 					      </a> -->
+<!-- 					    </li> -->
 					    
-					  </ul>
-					</nav>
-			</div>
+<!-- 					  </ul> -->
+<!-- 					</nav> -->
+<!-- 			</div> -->
 		</div>
 		
 		

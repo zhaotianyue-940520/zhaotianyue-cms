@@ -38,7 +38,7 @@ public interface ArticleMapper {
 	
 	List<Article> list(int status);
 	
-	@Select("SELECT id,title,channel_id channelId , category_id categoryId,status ,hot "
+	@Select("SELECT id,title,channel_id channelId ,content, category_id categoryId,status ,hot "
 			+ " FROM cms_article WHERE id = #{value} ")
 	Article getInfoById(int id);
 	@Update("UPDATE cms_article SET hot=#{hot} WHERE id=#{myid}")
@@ -107,4 +107,9 @@ public interface ArticleMapper {
 	List<Complain> getComplains(int articleId);
 	
 	List<Complain> complain();
+	
+	@Select("SELECT * FROM cms_article where status=1 ")
+	List<Article> listAll();
+	@Update("update cms_article set articleType=articleType+1 where id = ${art}")
+	void liulan(@Param("art")String art);
 }

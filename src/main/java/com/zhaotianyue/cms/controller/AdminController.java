@@ -1,10 +1,10 @@
 package com.zhaotianyue.cms.controller;
 
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,6 +16,7 @@ import com.zhaotianyue.cms.condition.CmsMessage;
 import com.zhaotianyue.cms.entity.Article;
 import com.zhaotianyue.cms.entity.Complain;
 import com.zhaotianyue.cms.entity.Link;
+import com.zhaotianyue.cms.mapper.ArticleEs;
 import com.zhaotianyue.cms.service.ArticleService;
 import com.zhaotianyue.cms.service.LinkService;
 //管理员的控制层
@@ -24,6 +25,9 @@ import com.zhaotianyue.cms.service.LinkService;
 public class AdminController {
 	@Autowired
 	ArticleService as;
+	
+	@Autowired
+	ArticleEs ae;
 	
 	@Autowired
 	LinkService ls;
@@ -100,6 +104,10 @@ public class AdminController {
 		 *  修改数据
 		 */
 		int result = as.setCheckStatus(id,status);
+		//把审核通过的数据发送给ES
+		article.setStatus(status);
+		ae.save(article);
+		
 		if(result<1)
 			return new CmsMessage(CmsError.FAILED_UPDATE_DB,"设置失败，请稍后再试",null);
 		

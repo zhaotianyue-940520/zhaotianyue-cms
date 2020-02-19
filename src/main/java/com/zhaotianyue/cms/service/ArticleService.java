@@ -80,5 +80,11 @@ public interface ArticleService {
 	
 	PageInfo<Complain> getComplains(int articleId, int page);
 
-	PageInfo<Complain> complain(int page);
+	PageInfo<Complain> complain (int page);
+
+	List<Article> listAll();
+
+	void liulan(String replace);
+
+	List<Article> hotList();
 }

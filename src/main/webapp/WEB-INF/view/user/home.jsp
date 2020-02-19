@@ -68,6 +68,9 @@
 				    <a  class="nav-link" href="#" onclick="showWork($(this),'/user/postArticle')"  style="color:white;" >发表文章</a>
 				  </li>
 				  <li class="nav-item">
+				    <a  class="nav-link" href="#" onclick="showWork($(this),'/user/collect')"  style="color:white;" >我的收藏</a>
+				  </li>
+				  <li class="nav-item">
 				    <a class="nav-link" href="#" onclick="showWork($(this),'/user/comments')" style="color:white;" >我的评论</a>
 				  </li>
 				  <li class="nav-item">
